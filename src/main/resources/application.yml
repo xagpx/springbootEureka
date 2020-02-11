@@ -1,0 +1,68 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    #服务名，默认取 spring.application.name 配置值，如果没有则为 unknown
+    appname: provider-service
+    #设置当前实例的主机名称
+    hostname: localhost
+  client:
+    service-url: 
+      #指定服务注册中心地址，类型为 HashMap，并设置有一组默认值，
+      #默认的Key为 defaultZone；默认的Value为 http://localhost:8761/eureka ，
+      #如果服务注册中心为高可用集群时，多个注册中心地址以逗号分隔。
+      defaultZone:
+        http://localhost:8761/eureka/
+
+    #是否将自己注册到Eureka-Server中，默认的为true
+    register-with-eureka: false
+
+    #是否从Eureka-Server中获取服务注册信息，默认为true
+    fetch-registry: false
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      show-details: ALWAYS
+
+
+
+#eureka:
+#  # spring-cloud-netflix-eureka-server下路径：org.springframework.cloud.netflix.eureka.server.EurekaServerConfigBean
+#  server: # 需要引入eureka.server包，其中包含了client包
+#    enable: false
+#    enableSelfPreservation: true # eureka的自我保护机制，false表示关闭，当服务掉线后，eureka会保护，不会下线，认为服务在重试连接
+#  # spring-cloud-netflix-eureka-client下路径：org.springframework.cloud.netflix.eureka.EurekaClientConfigBean
+#  client: # 需要引入eureka.client包，starter包含了ribbon-eureka
+#    enabled: true # 是否向eureka服务进行注册，关闭注册服务为false
+#    registerWithEureka: true # 该实例是否注册自己的信息到eureka上，让其他实例发现自己；在某些场景下，你只想发现别的服务，且不想被别的服务发现你
+#    fetchRegistry: true # 客户端是否从eureka服务上获取注册表信息 
+#    registryFetchIntervalSeconds: 30 # 单位秒，从eureka服务器获取注册表信息的频率
+#    instanceInfoReplicationIntervalSeconds: 30 # 实例改变状态被反馈到eureka上的更新频率，单位秒
+#    initialInstanceInfoReplicationIntervalSeconds: 40 # 表示程序启动后，多长时间开始把该实例的信息复制到eureka服务上面
+#    proxyPort: null #如果有的话，获取到eureka服务端的代理接口
+#    proxyHost: null #如果有的话，获取到eureka服务端的代理host
+#    proxyUserName: null
+#    proxyPassword: null
+#    eurekaServiceUrlPollIntervalSeconds: 300 # 表示拉取eureka服务信息的变更情况，eureka服务器，可能会增加和减少，这个配置表示该客户端应该多久知晓这变更情况
+#    eurekaServerReadTimeoutSeconds: 8 # 表示从eureka服务读取信息，需要等待的超时时间（读超时）
+#    eurekaServerConnectTimeoutSeconds: 5 # 表示连接eureka服务需要的超时时间（连接超时）
+#    eurekaConnectionIdleTimeoutSeconds: 30 # 表示到eureka服务端的http连接在关闭之前，可以空闲的时间，单位秒
+#    heartbeatExecutorThreadPoolSize: 2 # 心跳线程被初始化的线程数
+#    heartbeatExecutorExponentialBackOffBound: 10 # 避退相关属性，在发送一系列超时的情况下，作为延时重试的最大乘数数值
+#    gZipContent: true # 表示从eureka服务上获取的内容是否被压缩
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/ # 该值为默认值，多个，采用逗号分隔
+#  # spring-cloud-netflix-eureka-client下路径：org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean
+#  instance:
+#    hostname: DEMO_HOST_NAME
+#    actuatorPrefix: /actuator
+#    # 客户端发送心跳到eureka服务的频率，以此来表示该实例存活着。eureka服务在leaseExpirationDurationInSeconds周期内，没有接收到心跳，将会将该实例进行移除，避免流量往该实例流入
+#    leaseRenewalIntervalInSeconds: 30 # 单位秒
+#    leaseExpirationDurationInSeconds: 90 # 表示eureka服务从接收最后一个心跳开始到移除该实例之间，需要等待的时间
+#    preferIpAddress: false # 使用IP地址来代替主机名，在eureka上点击实例的时候，访问的路径使用IP而不是主机名
+#    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+#    statusPageUrl: http://xxx/${xxx}.html # 在eureka上点击该实例时，跳转的详细页面
